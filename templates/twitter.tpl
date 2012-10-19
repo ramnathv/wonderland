@@ -1,6 +1,3 @@
-{% raw %}
-<script id="twitter-template" type="text/x-handlebars-template">
-
 <div class="profile twitter modal" id="twitter-profile">
   {{#with user}}
   <div class="profile-info">
@@ -52,6 +49,3 @@
     {{/each}}
   </ul>
 </div>
-
-</script>
-{% endraw %}

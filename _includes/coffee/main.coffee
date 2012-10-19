@@ -1,4 +1,4 @@
-twitter_template = Handlebars.compile($("#twitter-template").html())
+twitter_template = false
 
 render_twitter = (data) ->
 
@@ -25,9 +25,15 @@ render_twitter = (data) ->
 show_twitter = ->
   twitter_modal = $(".twitter.modal")
   if twitter_modal.length then return twitter_modal.modal('show')
+
   $.ajax
-    url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker"
-    dataType: "jsonp"
-    success: render_twitter
+    url: "{{site.url}}/templates/twitter.tpl"
+    success: (data) ->
+      twitter_template = Handlebars.compile(data)
+
+      $.ajax
+        url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker"
+        dataType: "jsonp"
+        success: render_twitter
 
 $(document).on "click", "#twitter-link", show_twitter

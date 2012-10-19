@@ -2,7 +2,7 @@
 (function() {
   var render_twitter, show_twitter, twitter_template;
 
-  twitter_template = Handlebars.compile($("#twitter-template").html());
+  twitter_template = false;
 
   render_twitter = function(data) {
     var context, modal;
@@ -32,9 +32,15 @@
       return twitter_modal.modal('show');
     }
     return $.ajax({
-      url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker",
-      dataType: "jsonp",
-      success: render_twitter
+      url: "{{site.url}}/templates/twitter.tpl",
+      success: function(data) {
+        twitter_template = Handlebars.compile(data);
+        return $.ajax({
+          url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker",
+          dataType: "jsonp",
+          success: render_twitter
+        });
+      }
     });
   };
 
