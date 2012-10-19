@@ -5,8 +5,6 @@ layout: none
 {% capture css %}
 {% include css/bootstrap.min.css %}
 {% include css/bootstrap-responsive.min.css %}
-{% include css/main.css %}
-{% include css/media.css %}
-{% include css/modals.css %}
+{% include css/style.css %}
 {% endcapture %}
 {{ css | strip_newlines }}

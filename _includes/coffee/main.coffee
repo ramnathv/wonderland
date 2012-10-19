@@ -36,4 +36,26 @@ show_twitter = ->
         dataType: "jsonp"
         success: render_twitter
 
+first_active = false
+
+set_active_nav = (el) ->
+  nav = $("#links")
+
+  if !first_active
+    first_active = nav.find("li.active")
+
+  nav.find("li").removeClass("active")
+  el.addClass("active")
+
+reset_active_nav = ->
+  nav = $("#links")
+  nav.find("li").removeClass("active")
+  first_active.addClass("active")
+
 $(document).on "click", "#twitter-link", show_twitter
+
+$(document).on "show", ".twitter.modal", ->
+  set_active_nav($("#twitter-link").parent())
+
+$(document).on "hide", ".profile.modal", ->
+  reset_active_nav()
