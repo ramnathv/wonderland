@@ -74,7 +74,7 @@
   }
 
   h2 a:hover, h3 a:hover
-  { color: @adjacent-color; }
+  { color: $highlight_color; }
 }
 
 .profile-description {
@@ -137,7 +137,7 @@
     }
 
     a:hover, a:hover strong {
-      color: @adjacent-color;
+      color: $highlight_color;
     }
   }
 
@@ -152,27 +152,27 @@
 }
 
 //Profile Icons
-profile-icons (@bgicon)
+profile-icons(bgicon)
   display: inline-block;
-  background: @bgicon;
+  background: url(bgicon) no-repeat;
   margin-left: 10px;
   padding-left: 20px;
 
 
 .profile-watchers {
-  profile-icons("url('/static/imgs/ico-watchers.png') no-repeat");
+  profile-icons('{{site.url}}/img/ico-watchers.png')
 }
 
 .profile-forks {
-  profile-icons("url('/static/imgs/ico-forks.png') no-repeat");
+  profile-icons('{{site.url}}/img/ico-forks.png')
 }
 
 .profile-comments {
-  profile-icons("url('/static/imgs/ico-comments.png') no-repeat");
+  profile-icons('{{site.url}}/img/ico-comments.png')
 }
 
 .profile-likes {
-  profile-icons("url('/static/imgs/ico-likes.png') no-repeat");
+  profile-icons('{{site.url}}/img/ico-likes.png')
 }
 
 
@@ -198,7 +198,7 @@ profile-icons (@bgicon)
     left: 0;
     width: 32px;
     height: 32px;
-    border: 2px solid @adjacent-color;
+    border: 2px solid $highlight_color;
   }
 
   span {
@@ -282,7 +282,7 @@ profile-icons (@bgicon)
 
   a:hover {
     border-bottom: 0;
-    color: @adjacent-color;
+    color: $highlight_color;
   }
 }
 
@@ -299,7 +299,7 @@ profile-icons (@bgicon)
 
   a:hover {
     border-bottom: 0;
-    color: @adjacent-color;
+    color: $highlight_color;
   }
 }
 
@@ -384,7 +384,7 @@ profile-icons (@bgicon)
 
   a:hover {
     border-bottom: 0;
-    color: @adjacent-color;
+    color: $highlight_color;
   }
 }
 
@@ -420,7 +420,7 @@ profile-icons (@bgicon)
     left: 0;
     width: 32px;
     height: 32px;
-    border: 2px solid @adjacent-color;
+    border: 2px solid $highlight_color;
   }
 }
 
@@ -502,4 +502,91 @@ profile-icons (@bgicon)
   line-height: 18px;
   margin-left: 45px;
   color: #999;
+}
+
+
+//Github and Bitbucket Profile
+.profile-repos {
+  list-style: none;
+  margin: 0;
+  background: #fff;
+
+  li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #C2C2C2
+  }
+}
+
+.profile-repo-name {
+  border-bottom: 0;
+  font-weight: 500;
+}
+.profile-repo-name:hover {
+  border-bottom: 0;
+}
+
+.profile-repo-text {
+  color: #777;
+  margin:0;
+  padding: 5px 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.profile-repo-stats {
+  list-style: none;
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+
+  li {
+    padding: 0;
+    border: 0;
+    display: inline-block;
+
+    //ie7 inline-block hack
+    zoom: 1;
+    *display: inline;
+  }
+
+  a {
+    border-bottom: 0;
+  }
+
+  a:hover {
+    border-bottom: 0;
+    color: $highlight_color;
+  }
+}
+
+.profile-repo-fork {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 18px;
+
+  a {
+    border-bottom: 0;
+    color: #777;
+  }
+
+  a:hover {
+    border-bottom: 0;
+    color: $highlight_color;
+  }
+}
+
+.profile-repo-logo {
+  float: right;
+  border-bottom: 0;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border: 0;
+  }
+}
+
+.profile-repo-logo:hover {
+  border-bottom: 0;
 }

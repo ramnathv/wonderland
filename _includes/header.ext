@@ -30,6 +30,9 @@
             {% if site.twitter %}
               <li><a id="twitter-link">twitter</a></li>
             {% endif %}
+            {% if site.github %}
+              <li><a id="github-link">github</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

@@ -254,7 +254,7 @@ ul.post-archive li span {
 .profile-name h2 a:hover,
 .profile-name h3 a:hover,
 .profile-name {
-  color: ;
+  color: #01a9db;
 }
 .profile-description {
   clear: left;
@@ -314,7 +314,7 @@ ul.post-archive li span {
 }
 .profile-stats li a:hover,
 .profile-stats li a:hover strong {
-  color: ;
+  color: #01a9db;
 }
 .profile-stats li:first-child span {
   border-left: 0;
@@ -323,9 +323,27 @@ ul.post-archive li span {
   padding: 10px 15px;
   border-bottom: 1px solid #c2c2c2;
 }
-profile-icons (bgicon) {
+.profile-watchers {
   display: inline-block;
-  background: ;
+  background: url("{{site.url}}/img/ico-watchers.png") no-repeat;
+  margin-left: 10px;
+  padding-left: 20px;
+}
+.profile-forks {
+  display: inline-block;
+  background: url("{{site.url}}/img/ico-forks.png") no-repeat;
+  margin-left: 10px;
+  padding-left: 20px;
+}
+.profile-comments {
+  display: inline-block;
+  background: url("{{site.url}}/img/ico-comments.png") no-repeat;
+  margin-left: 10px;
+  padding-left: 20px;
+}
+.profile-likes {
+  display: inline-block;
+  background: url("{{site.url}}/img/ico-likes.png") no-repeat;
   margin-left: 10px;
   padding-left: 20px;
 }
@@ -348,7 +366,7 @@ profile-icons (bgicon) {
   left: 0;
   width: 32px;
   height: 32px;
-  border: 2px solid;
+  border: 2px solid #01a9db;
 }
 .tweet-title span {
   color: #777;
@@ -418,7 +436,7 @@ profile-icons (bgicon) {
 }
 .profile-repo-stats a:hover {
   border-bottom: 0;
-  color: ;
+  color: #01a9db;
 }
 .profile-repo-fork {
   margin: 0;
@@ -432,7 +450,7 @@ profile-icons (bgicon) {
 }
 .profile-repo-fork a:hover {
   border-bottom: 0;
-  color: ;
+  color: #01a9db;
 }
 .profile-repo-logo {
   float: right;
@@ -502,7 +520,7 @@ profile-icons (bgicon) {
 }
 .profile-shot-stats a:hover {
   border-bottom: 0;
-  color: ;
+  color: #01a9db;
 }
 .profile-shot-date {
   float: right;
@@ -531,7 +549,7 @@ profile-icons (bgicon) {
   left: 0;
   width: 32px;
   height: 32px;
-  border: 2px solid;
+  border: 2px solid #01a9db;
 }
 .track-image:hover {
   border-bottom: 0;
@@ -600,4 +618,73 @@ profile-icons (bgicon) {
   line-height: 18px;
   margin-left: 45px;
   color: #999;
+}
+.profile-repos {
+  list-style: none;
+  margin: 0;
+  background: #fff;
+}
+.profile-repos li {
+  padding: 10px 15px;
+  border-bottom: 1px solid #c2c2c2;
+}
+.profile-repo-name {
+  border-bottom: 0;
+  font-weight: 500;
+}
+.profile-repo-name:hover {
+  border-bottom: 0;
+}
+.profile-repo-text {
+  color: #777;
+  margin: 0;
+  padding: 5px 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+.profile-repo-stats {
+  list-style: none;
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+.profile-repo-stats li {
+  padding: 0;
+  border: 0;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.profile-repo-stats a {
+  border-bottom: 0;
+}
+.profile-repo-stats a:hover {
+  border-bottom: 0;
+  color: #01a9db;
+}
+.profile-repo-fork {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+.profile-repo-fork a {
+  border-bottom: 0;
+  color: #777;
+}
+.profile-repo-fork a:hover {
+  border-bottom: 0;
+  color: #01a9db;
+}
+.profile-repo-logo {
+  float: right;
+  border-bottom: 0;
+}
+.profile-repo-logo img {
+  width: 32px;
+  height: 32px;
+  border: 0;
+}
+.profile-repo-logo:hover {
+  border-bottom: 0;
 }
