@@ -90,13 +90,13 @@
         github_template = Handlebars.compile(data);
         return $.ajax({
           url: "https://api.github.com/users/{{site.github}}",
-          dataType: "json",
+          dataType: "jsonp",
           success: function(user_data) {
             return $.ajax({
               url: "https://api.github.com/users/{{site.github}}/repos",
-              dataType: "json",
+              dataType: "jsonp",
               success: function(repo_data) {
-                return render_github(user_data, repo_data);
+                return render_github(user_data.data, repo_data.data);
               }
             });
           }

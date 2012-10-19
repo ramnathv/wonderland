@@ -74,14 +74,14 @@ show_github = ->
 
       $.ajax
         url: "https://api.github.com/users/{{site.github}}"
-        dataType: "json"
+        dataType: "jsonp"
         success: (user_data) ->
 
           $.ajax
             url: "https://api.github.com/users/{{site.github}}/repos"
-            dataType: "json"
+            dataType: "jsonp"
             success: (repo_data) ->
-              render_github(user_data, repo_data)
+              render_github(user_data.data, repo_data.data)
 
 show_instagram = ->
   instagram_modal = $(".instagram.modal")
