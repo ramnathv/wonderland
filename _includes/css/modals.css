@@ -8,16 +8,7 @@
   background: #444;
 }
 .modal {
-  position: fixed;
-  top: 0;
-  left: 250px;
-  background: #fff;
-  margin: 0;
-  border-radius: 0;
-  height: 100%;
-  overflow: auto;
-  width: 400px;
-  border-right: 1px solid $text-color;
+  position: absolute;
 }
 .profile {
   background: #e9e9e9;

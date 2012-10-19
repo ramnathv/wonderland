@@ -1,4 +1,9 @@
 @media (min-width: 767px)
+
+  #sidebar
+    width 250px
+    position fixed
+
   .sidebar-nav-fixed
     position fixed
     width 250px
@@ -9,13 +14,17 @@
         &.nav
           padding-top 100px
 
-@media (min-width: 767px) and (max-width: 979px)
-  .sidebar-nav-fixed
-    width 175px
-
-  #content #post-wrapper
-    margin-left 175px
-
-@media (min-width: 980px)
   #content #post-wrapper
     margin-left 275px
+
+  .modal
+    position fixed
+    top 0
+    left 250px
+    background #fff
+    margin 0
+    border-radius 0
+    height 100%
+    overflow auto
+    width 400px
+    border-right 1px solid $text-color

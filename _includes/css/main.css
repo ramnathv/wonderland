@@ -36,9 +36,7 @@ p {
 #sidebar {
   min-height: 100%;
   z-index: 1200;
-  position: fixed;
   background: #efefef;
-  width: 250px;
 }
 #sidebar .sidebar-nav {
   border-right: 1px solid #c2c2c2;
