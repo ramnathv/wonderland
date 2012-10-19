@@ -21,7 +21,7 @@
       <div id="sidebar" class="span3">
         <div class="sidebar-nav sidebar-nav-fixed">
           <div class="info">
-            <p id="avatar"><a href="#"><img alt="Title" src="http://s.gravatar.com/avatar/9b335f8228dbbf55711ba32bab4cd591?s=100" /></a></p>
+            <p id="avatar"><a href="{{site.url}}"><img alt="Title" src="http://s.gravatar.com/avatar/9b335f8228dbbf55711ba32bab4cd591?s=100" /></a></p>
             <h3><a href="/">{{site.title}}</a></h3>
             <p class="description">{{site.description}}</p>
           </div>
