@@ -1,7 +1,7 @@
 @media (min-width: 767px) {
   .sidebar-nav-fixed {
     position: fixed;
-    width: 275px;
+    width: 250px;
   }
   #content ol#posts li.post.nav {
     padding-top: 100px;

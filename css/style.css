@@ -7,5 +7,6 @@ layout: none
 {% include css/bootstrap-responsive.min.css %}
 {% include css/main.css %}
 {% include css/media.css %}
+{% include css/modals.css %}
 {% endcapture %}
 {{ css | strip_newlines }}
