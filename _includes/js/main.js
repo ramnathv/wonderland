@@ -7,7 +7,7 @@
   github_template = false;
 
   close_all_modals = function() {
-    return $(".modal").modal('hide');
+    return $(".modal.in").modal('hide');
   };
 
   render_twitter = function(data) {

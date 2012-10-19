@@ -2,7 +2,7 @@ twitter_template = false
 github_template = false
 
 close_all_modals = ->
-  $(".modal").modal('hide')
+  $(".modal.in").modal('hide')
 
 render_twitter = (data) ->
 
