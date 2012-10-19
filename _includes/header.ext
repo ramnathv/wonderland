@@ -10,7 +10,7 @@
   <meta name="description" content="Adam Becker writes code in Oakland, CA.">
 
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{site.url}}/css/style.css">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,600,200,800' rel='stylesheet' type='text/css'>
 
   <script src="/js/libs/modernizr-2.5.3.min.js"></script>
