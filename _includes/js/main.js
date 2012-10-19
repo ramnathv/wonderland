@@ -26,6 +26,11 @@
   };
 
   show_twitter = function() {
+    var twitter_modal;
+    twitter_modal = $(".twitter.modal");
+    if (twitter_modal.length) {
+      return twitter_modal.modal('show');
+    }
     return $.ajax({
       url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker",
       dataType: "jsonp",

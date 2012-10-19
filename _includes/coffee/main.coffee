@@ -23,6 +23,8 @@ render_twitter = (data) ->
 
 
 show_twitter = ->
+  twitter_modal = $(".twitter.modal")
+  if twitter_modal.length then return twitter_modal.modal('show')
   $.ajax
     url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name=adamjacobbecker"
     dataType: "jsonp"
