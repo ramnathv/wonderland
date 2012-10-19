@@ -1,5 +1,12 @@
 twitter_template = false
 github_template = false
+instagram_template = false
+
+show_profile = (html) ->
+  modal = $(html)
+  $("body").append(modal)
+  close_all_modals()
+  modal.modal('show')
 
 close_all_modals = ->
   $(".modal.in").modal('hide')
@@ -21,10 +28,7 @@ render_twitter = (data) ->
 
     tweets: data
 
-  modal = $(twitter_template(context))
-  $("body").append(modal)
-  close_all_modals()
-  modal.modal('show')
+  show_profile(twitter_template(context))
 
 render_github = (user_data, repo_data) ->
   context =
@@ -32,10 +36,14 @@ render_github = (user_data, repo_data) ->
 
     repos: repo_data
 
-  modal = $(github_template(context))
-  $("body").append(modal)
-  close_all_modals()
-  modal.modal('show')
+  show_profile(github_template(context))
+
+render_instagram = (user_data, photo_data) ->
+  context =
+    user: user_data.data
+    media: photo_data.data
+
+  show_profile(instagram_template(context))
 
 show_twitter = ->
   twitter_modal = $(".twitter.modal")
@@ -75,6 +83,29 @@ show_github = ->
             success: (repo_data) ->
               render_github(user_data, repo_data)
 
+show_instagram = ->
+  instagram_modal = $(".instagram.modal")
+  if instagram_modal.length
+    close_all_modals()
+    return instagram_modal.modal('show')
+
+  $.ajax
+    url: "{{site.url}}/templates/instagram.tpl"
+    success: (data) ->
+      instagram_template = Handlebars.compile(data)
+
+      $.ajax
+        url: "https://api.instagram.com/v1/users/{{site.instagram_id}}?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
+        dataType: "jsonp"
+        success: (user_data) ->
+
+          $.ajax
+            url: "https://api.instagram.com/v1/users/{{site.instagram_id}}/media/recent?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
+            dataType: "jsonp"
+            success: (photo_data) ->
+              render_instagram(user_data, photo_data)
+
+
 first_active = false
 
 set_active_nav = (el) ->
@@ -93,12 +124,16 @@ reset_active_nav = ->
 
 $(document).on "click", "#twitter-link", show_twitter
 $(document).on "click", "#github-link", show_github
+$(document).on "click", "#instagram-link", show_instagram
 
 $(document).on "show", ".twitter.modal", ->
   set_active_nav($("#twitter-link").parent())
 
 $(document).on "show", ".github.modal", ->
   set_active_nav($("#github-link").parent())
+
+$(document).on "show", ".instagram.modal", ->
+  set_active_nav($("#instagram-link").parent())
 
 $(document).on "hide", ".profile.modal", ->
   reset_active_nav()

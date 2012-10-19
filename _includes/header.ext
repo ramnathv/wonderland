@@ -33,6 +33,9 @@
             {% if site.github %}
               <li><a id="github-link">github</a></li>
             {% endif %}
+            {% if site.instagram_id %}
+              <li><a id="instagram-link">instagram</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
