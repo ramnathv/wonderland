@@ -1,0 +1,22 @@
+@media (min-width: 767px) {
+  .sidebar-nav-fixed {
+    position: fixed;
+    width: 275px;
+  }
+  #content ol#posts li.post.nav {
+    padding-top: 100px;
+  }
+}
+@media (min-width: 767px) and (max-width: 979px) {
+  .sidebar-nav-fixed {
+    width: 175px;
+  }
+  #content #post-wrapper {
+    margin-left: 175px;
+  }
+}
+@media (min-width: 980px) {
+  #content #post-wrapper {
+    margin-left: 275px;
+  }
+}

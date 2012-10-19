@@ -1,0 +1,18 @@
+{% include header.ext %}
+
+<div id="post-wrapper">
+  <ol id="posts">
+    <li class="post">
+      <h3><a href="#">{{page.title}}</a></h3>
+      {{ content }}
+    </li>
+  </ol>
+  <div class="pagination">
+    <ul>
+      <li><a href="{{site.url}}">&#171; Back Home</a></li>
+    </ul>
+  </div>
+</div>
+
+
+{% include footer.ext %}
