@@ -36,7 +36,8 @@
       },
       tweets: data
     };
-    return show_profile(twitter_template(context));
+    show_profile(twitter_template(context));
+    return $("#twitter-link").parent().removeClass('loading');
   };
 
   render_github = function(user_data, repo_data) {
@@ -45,7 +46,8 @@
       user: user_data,
       repos: repo_data
     };
-    return show_profile(github_template(context));
+    show_profile(github_template(context));
+    return $("#github-link").parent().removeClass('loading');
   };
 
   render_instagram = function(user_data, photo_data) {
@@ -54,7 +56,8 @@
       user: user_data.data,
       media: photo_data.data
     };
-    return show_profile(instagram_template(context));
+    show_profile(instagram_template(context));
+    return $("#instagram-link").parent().removeClass('loading');
   };
 
   show_twitter = function() {
@@ -64,6 +67,7 @@
       close_all_modals();
       return twitter_modal.modal('show');
     }
+    $("#twitter-link").parent().addClass('loading');
     return $.ajax({
       url: "{{site.url}}/templates/twitter.tpl",
       success: function(data) {
@@ -84,6 +88,7 @@
       close_all_modals();
       return github_modal.modal('show');
     }
+    $("#github-link").parent().addClass('loading');
     return $.ajax({
       url: "{{site.url}}/templates/github.tpl",
       success: function(data) {
@@ -112,6 +117,7 @@
       close_all_modals();
       return instagram_modal.modal('show');
     }
+    $("#instagram-link").parent().addClass('loading');
     return $.ajax({
       url: "{{site.url}}/templates/instagram.tpl",
       success: function(data) {
@@ -174,6 +180,19 @@
 
   $(document).on("hide", ".profile.modal", function() {
     return reset_active_nav();
+  });
+
+  $(function() {
+    return $(".loading-spinner").spin({
+      lines: 9,
+      length: 5,
+      width: 3,
+      radius: 6,
+      corners: 1.0,
+      rotate: 0,
+      trail: 60,
+      speed: 1.4
+    });
   });
 
 }).call(this);

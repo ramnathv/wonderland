@@ -68,7 +68,6 @@ p {
   width: 100px;
   height: 100px;
   -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
   border-radius: 50px;
 }
 #sidebar .sidebar-nav ul#links {
@@ -79,6 +78,16 @@ p {
 }
 #sidebar .sidebar-nav ul#links li {
   border-bottom: 1px solid #c2c2c2;
+  position: relative;
+}
+#sidebar .sidebar-nav ul#links li .loading-spinner {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 26px;
+}
+#sidebar .sidebar-nav ul#links li.loading .loading-spinner {
+  display: block;
 }
 #sidebar .sidebar-nav ul#links li.active a {
   border-right: 6px solid #01a9db;
@@ -172,16 +181,23 @@ ul.post-archive li span {
   .modal {
     position: fixed;
     top: 0;
-    left: 250px;
+    left: -250px;
     background: #fff;
     margin: 0;
     -webkit-border-radius: 0;
-    -moz-border-radius: 0;
     border-radius: 0;
     height: 100%;
     overflow: auto;
     width: 400px;
     border-right: 1px solid $text-color;
+    -webkit-transition: left 0.3s linear;
+    -moz-transition: left 0.3s linear;
+    -o-transition: left 0.3s linear;
+    -ms-transition: left 0.3s linear;
+    transition: left 0.3s linear;
+  }
+  .modal.in {
+    left: 250px;
   }
 }
 .modal-backdrop {
@@ -494,6 +510,7 @@ ul.post-archive li span {
   line-height: 18px;
   color: ;
   overflow: hidden;
+  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

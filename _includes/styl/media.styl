@@ -20,7 +20,7 @@
   .modal
     position fixed
     top 0
-    left 250px
+    left -250px
     background #fff
     margin 0
     border-radius 0
@@ -28,3 +28,7 @@
     overflow auto
     width 400px
     border-right 1px solid $text-color
+    transition(left 0.3s linear)
+
+    &.in
+      left 250px

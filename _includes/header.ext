@@ -28,13 +28,13 @@
           <ul id="links">
             <li{% if page.url == "/index.html" %} class="active"{% endif %}><a href="{{site.url}}">home</a></li>
             {% if site.twitter %}
-              <li><a id="twitter-link">twitter</a></li>
+              <li><a id="twitter-link">twitter</a><div class="loading-spinner"></div></li>
             {% endif %}
             {% if site.github %}
-              <li><a id="github-link">github</a></li>
+              <li><a id="github-link">github</a><div class="loading-spinner"></div></li>
             {% endif %}
             {% if site.instagram_id %}
-              <li><a id="instagram-link">instagram</a></li>
+              <li><a id="instagram-link">instagram</a><div class="loading-spinner"></div></li>
             {% endif %}
           </ul>
         </div>

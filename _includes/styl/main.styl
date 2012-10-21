@@ -78,6 +78,17 @@ p
 
       li
         border-bottom 1px solid #c2c2c2
+        position relative
+
+        .loading-spinner
+          display none
+          position absolute
+          top 24px
+          right 26px
+
+        &.loading
+          .loading-spinner
+            display block
 
         &.active a
           border-right 6px solid $highlight_color

@@ -30,6 +30,8 @@ render_twitter = (data) ->
 
   show_profile(twitter_template(context))
 
+  $("#twitter-link").parent().removeClass('loading')
+
 render_github = (user_data, repo_data) ->
   context =
     user: user_data
@@ -38,6 +40,8 @@ render_github = (user_data, repo_data) ->
 
   show_profile(github_template(context))
 
+  $("#github-link").parent().removeClass('loading')
+
 render_instagram = (user_data, photo_data) ->
   context =
     user: user_data.data
@@ -45,11 +49,15 @@ render_instagram = (user_data, photo_data) ->
 
   show_profile(instagram_template(context))
 
+  $("#instagram-link").parent().removeClass('loading')
+
 show_twitter = ->
   twitter_modal = $(".twitter.modal")
   if twitter_modal.length
     close_all_modals()
     return twitter_modal.modal('show')
+
+  $("#twitter-link").parent().addClass('loading')
 
   $.ajax
     url: "{{site.url}}/templates/twitter.tpl"
@@ -66,6 +74,8 @@ show_github = ->
   if github_modal.length
     close_all_modals()
     return github_modal.modal('show')
+
+  $("#github-link").parent().addClass('loading')
 
   $.ajax
     url: "{{site.url}}/templates/github.tpl"
@@ -88,6 +98,8 @@ show_instagram = ->
   if instagram_modal.length
     close_all_modals()
     return instagram_modal.modal('show')
+
+  $("#instagram-link").parent().addClass('loading')
 
   $.ajax
     url: "{{site.url}}/templates/instagram.tpl"
@@ -137,3 +149,14 @@ $(document).on "show", ".instagram.modal", ->
 
 $(document).on "hide", ".profile.modal", ->
   reset_active_nav()
+
+$ ->
+  $(".loading-spinner").spin
+    lines: 9
+    length: 5
+    width: 3
+    radius: 6
+    corners: 1.0
+    rotate: 0
+    trail: 60
+    speed: 1.4
