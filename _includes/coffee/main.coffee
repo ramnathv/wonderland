@@ -147,6 +147,10 @@ $(document).on "show", ".github.modal", ->
 $(document).on "show", ".instagram.modal", ->
   set_active_nav($("#instagram-link").parent())
 
+$(document).on "show", ".post.modal", ->
+  page_name = $(this).data('page-name')
+  set_active_nav($("a[data-page-name=#{page_name}]").parent())
+
 $(document).on "hide", ".profile.modal, .post.modal", ->
   reset_active_nav()
 
@@ -156,11 +160,11 @@ $(document).on "click", "ul#links a.static-page", (e) ->
   page_name = el.data('page-name')
   existing_modal = $(".modal[data-page-name=#{page_name}]")
 
-  set_active_nav(el.parent())
-
   if existing_modal.length > 0
     close_all_modals()
     return existing_modal.modal('show')
+
+  el.parent().addClass('loading')
 
   $.ajax
     url: el.attr('href')
@@ -173,6 +177,7 @@ $(document).on "click", "ul#links a.static-page", (e) ->
       """)
       modal.append(post)
       $("body").append(modal);
+      el.parent().removeClass('loading')
       modal.modal('show');
 
 $ ->

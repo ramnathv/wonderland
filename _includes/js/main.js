@@ -178,6 +178,12 @@
     return set_active_nav($("#instagram-link").parent());
   });
 
+  $(document).on("show", ".post.modal", function() {
+    var page_name;
+    page_name = $(this).data('page-name');
+    return set_active_nav($("a[data-page-name=" + page_name + "]").parent());
+  });
+
   $(document).on("hide", ".profile.modal, .post.modal", function() {
     return reset_active_nav();
   });
@@ -188,11 +194,11 @@
     el = $(this);
     page_name = el.data('page-name');
     existing_modal = $(".modal[data-page-name=" + page_name + "]");
-    set_active_nav(el.parent());
     if (existing_modal.length > 0) {
       close_all_modals();
       return existing_modal.modal('show');
     }
+    el.parent().addClass('loading');
     return $.ajax({
       url: el.attr('href'),
       success: function(data) {
@@ -201,6 +207,7 @@
         modal = $("<div class='modal post' data-page-name='" + page_name + "'>\n  <button class=\"close\" data-dismiss=\"modal\">×</button>\n</div>");
         modal.append(post);
         $("body").append(modal);
+        el.parent().removeClass('loading');
         return modal.modal('show');
       }
     });
