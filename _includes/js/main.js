@@ -178,8 +178,32 @@
     return set_active_nav($("#instagram-link").parent());
   });
 
-  $(document).on("hide", ".profile.modal", function() {
+  $(document).on("hide", ".profile.modal, .post.modal", function() {
     return reset_active_nav();
+  });
+
+  $(document).on("click", "ul#links a.static-page", function(e) {
+    var el, existing_modal, page_name;
+    e.preventDefault();
+    el = $(this);
+    page_name = el.data('page-name');
+    existing_modal = $(".modal[data-page-name=" + page_name + "]");
+    set_active_nav(el.parent());
+    if (existing_modal.length > 0) {
+      close_all_modals();
+      return existing_modal.modal('show');
+    }
+    return $.ajax({
+      url: el.attr('href'),
+      success: function(data) {
+        var modal, post;
+        post = $(data).find("li.post");
+        modal = $("<div class='modal post' data-page-name='" + page_name + "'>\n  <button class=\"close\" data-dismiss=\"modal\">×</button>\n</div>");
+        modal.append(post);
+        $("body").append(modal);
+        return modal.modal('show');
+      }
+    });
   });
 
   $(function() {
