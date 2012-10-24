@@ -184,8 +184,8 @@ $ ->
   $(".loading-spinner").spin
     lines: 9
     length: 5
-    width: 3
-    radius: 6
+    width: 2
+    radius: 5
     corners: 1.0
     rotate: 0
     trail: 60
