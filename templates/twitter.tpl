@@ -43,7 +43,7 @@
         {{{ text }}}
         </p>
         <p class="tweet-date">
-          {{ created_at }}
+          <span class="timeago" title="{{ created_at }}"></span>
         </p>
       </li>
     {{/each}}

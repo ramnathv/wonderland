@@ -44,7 +44,7 @@
       </span>
       <ul class="profile-shot-stats">
         {{#with likes}}<li><span class="profile-likes">{{ count }}</span></li>{{/with}}
-        <li class="profile-shot-date">{{ created_time }}</li>
+        <li class="profile-shot-date"><span class="timeago timeago-instagram" title="{{ created_time }}"></span></li>
       </ul>
     </li>
     {{/each}}

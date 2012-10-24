@@ -6,6 +6,9 @@ show_profile = (html) ->
   modal = $(html)
   $("body").append(modal)
   close_all_modals()
+  modal.find(".timeago-instagram").each ->
+    $(this).attr('title', new Date($(this).attr('title') * 1000).toISOString())
+  modal.find(".timeago").timeago()
   modal.modal('show')
 
 close_all_modals = ->

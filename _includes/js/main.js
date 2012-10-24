@@ -13,6 +13,10 @@
     modal = $(html);
     $("body").append(modal);
     close_all_modals();
+    modal.find(".timeago-instagram").each(function() {
+      return $(this).attr('title', new Date($(this).attr('title') * 1000).toISOString());
+    });
+    modal.find(".timeago").timeago();
     return modal.modal('show');
   };
 
