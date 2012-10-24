@@ -501,10 +501,9 @@ ul.post-archive li span {
   padding: 15px 0;
 }
 .profile-shots > li {
-  float: left;
   width: 300px;
   padding: 10px;
-  margin: 0 0px 20px 20px;
+  margin: 0 auto 20px auto;
   background: #fff;
 }
 .profile-shot {

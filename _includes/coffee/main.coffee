@@ -1,6 +1,7 @@
 twitter_template = false
 github_template = false
 instagram_template = false
+dribbble_template = false
 
 show_profile = (html) ->
   modal = $(html)
@@ -53,6 +54,15 @@ render_instagram = (user_data, photo_data) ->
   show_profile(instagram_template(context))
 
   $("#instagram-link").parent().removeClass('loading')
+
+render_dribbble = (data) ->
+  context =
+    shots: data.shots
+    user: data.shots[0].player
+
+  show_profile(dribbble_template(context))
+
+  $("#dribbble-link").parent().removeClass('loading')
 
 show_twitter = ->
   twitter_modal = $(".twitter.modal")
@@ -120,6 +130,24 @@ show_instagram = ->
             success: (photo_data) ->
               render_instagram(user_data, photo_data)
 
+show_dribbble = ->
+  dribbble_modal = $(".dribbble.modal")
+  if dribbble_modal.length
+    close_all_modals()
+    return dribbble_modal.modal('show')
+
+  $("#dribbble-link").parent().addClass('loading')
+
+  $.ajax
+    url: "{{site.url}}/templates/dribbble.tpl"
+    success: (data) ->
+      dribbble_template = Handlebars.compile(data)
+
+      $.ajax
+        url: "http://api.dribbble.com/players/{{site.dribbble}}/shots"
+        dataType: "jsonp"
+        success: (data) ->
+          render_dribbble(data)
 
 first_active = false
 
@@ -140,6 +168,7 @@ reset_active_nav = ->
 $(document).on "click", "#twitter-link", show_twitter
 $(document).on "click", "#github-link", show_github
 $(document).on "click", "#instagram-link", show_instagram
+$(document).on "click", "#dribbble-link", show_dribbble
 
 $(document).on "show", ".twitter.modal", ->
   set_active_nav($("#twitter-link").parent())
@@ -149,6 +178,9 @@ $(document).on "show", ".github.modal", ->
 
 $(document).on "show", ".instagram.modal", ->
   set_active_nav($("#instagram-link").parent())
+
+$(document).on "show", ".dribbble.modal", ->
+  set_active_nav($("#dribbble-link").parent())
 
 $(document).on "show", ".post.modal", ->
   page_name = $(this).data('page-name')
