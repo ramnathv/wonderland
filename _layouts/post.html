@@ -3,7 +3,8 @@
 <div id="post-wrapper">
   <ol id="posts">
     <li class="post">
-      <h3><a href="#">{{page.title}}</a> <span>{{ page.date | date_to_string }}</span></h3>
+      <h3><a href="#">{{page.title}}</a>
+      <span>{% if page.date %}{{ page.date | date_to_string }}{% endif %}</span></h3>
       {{ content }}
     </li>
   </ol>
