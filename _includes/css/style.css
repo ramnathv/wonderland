@@ -64,6 +64,10 @@ p {
   font-style: italic;
   margin-top: 0;
 }
+#sidebar .sidebar-nav #avatar {
+  float: left;
+  margin: 0 20px;
+}
 #sidebar .sidebar-nav #avatar img {
   width: 100px;
   height: 100px;
@@ -173,6 +177,10 @@ ul.post-archive li span {
   #sidebar {
     width: 250px;
     position: fixed;
+  }
+  #sidebar .sidebar-nav #avatar {
+    float: none;
+    margin: 10px 0;
   }
   .sidebar-nav-fixed {
     position: fixed;
