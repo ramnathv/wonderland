@@ -1,4 +1,4 @@
-<div class="profile twitter modal" id="twitter-profile" data-profile-name="twitter">
+<div class="profile twitter modal" id="twitter-profile">
   {{#with user}}
   <div class="profile-info">
     <button class="close" data-dismiss="modal">×</button>

@@ -209,7 +209,7 @@ $(document).on "click", "#lastfm-link", show_lastfm
 $(document).on "click", "#soundcloud-link", show_soundcloud
 
 $(document).on "show", ".profile.modal", ->
-  profile_name = $(this).data('profile-name')
+  profile_name = $(this).attr('id').match(/(.*)\-/)[1]
   set_active_nav($("##{profile_name}-link").parent())
 
 $(document).on "show", ".post.modal", ->

@@ -256,7 +256,7 @@
 
   $(document).on("show", ".profile.modal", function() {
     var profile_name;
-    profile_name = $(this).data('profile-name');
+    profile_name = $(this).attr('id').match(/(.*)\-/)[1];
     return set_active_nav($("#" + profile_name + "-link").parent());
   });
 
