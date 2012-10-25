@@ -160,6 +160,29 @@ show_lastfm = ->
               user_info: user_data
               recenttracks: track_data
 
+show_soundcloud = ->
+  soundcloud_modal = $(".soundcloud.modal")
+  if soundcloud_modal.length
+    close_all_modals()
+    return soundcloud_modal.modal('show')
+
+  $("#soundcloud-link").parent().addClass('loading')
+
+  load_template 'soundcloud', ->
+    $.ajax
+      url: "http://api.soundcloud.com/users/{{site.soundcloud}}/tracks.json?client_id={{site.soundcloud_api_key}}"
+      dataType: "jsonp"
+      success: (track_data) ->
+        $.ajax
+          url: "http://api.soundcloud.com/users/{{site.soundcloud}}.json?client_id={{site.soundcloud_api_key}}"
+          dataType: "jsonp"
+          success: (user_data) ->
+            show_profile 'soundcloud',
+              user_profile: user_data,
+              user_tracks:
+                tracks: track_data,
+                show_artwork: "true" is "{{site.soundcloud_show_artwork}}",
+                player_color: '#ffffff'
 
 
 first_active = false
@@ -183,6 +206,7 @@ $(document).on "click", "#github-link", show_github
 $(document).on "click", "#instagram-link", show_instagram
 $(document).on "click", "#dribbble-link", show_dribbble
 $(document).on "click", "#lastfm-link", show_lastfm
+$(document).on "click", "#soundcloud-link", show_soundcloud
 
 $(document).on "show", ".profile.modal", ->
   profile_name = $(this).data('profile-name')

@@ -42,6 +42,9 @@
             {% if site.lastfm %}
               <li><a id="lastfm-link">last.fm</a><div class="loading-spinner"></div></li>
             {% endif %}
+            {% if site.soundcloud %}
+              <li><a id="soundcloud-link">soundcloud</a><div class="loading-spinner"></div></li>
+            {% endif %}
             <li>
               <a href="{{site.url}}/contact/" class="static-page" data-page-name="contact">contact</a>
               <div class="loading-spinner"></div>

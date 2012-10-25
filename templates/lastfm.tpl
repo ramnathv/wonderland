@@ -4,7 +4,7 @@
     <button class="close" data-dismiss="modal">×</button>
     {{#if image}}
     <a href="{{ url }}" class="profile-avatar">
-      <img src="{{ avatar_url image }}" alt="{{name}}" />
+      <img src="{{ lastfm_avatar_url image }}" alt="{{name}}" />
     </a>
     {{/if}}
     <div class="profile-name">
@@ -29,10 +29,10 @@
     {{#each track}}
       <li>
         <a href="{{ url }}" class="track-image">
-          <img src="{{ image_url image }}" alt="{{ text artist }} - {{ name }}" />
+          <img src="{{ lastfm_image_url image }}" alt="{{ lastfm_text artist }} - {{ name }}" />
         </a>
         <p class="track-detail">
-          <a href="{{ url }}">{{ text artist }} - {{ name }}</a>
+          <a href="{{ url }}">{{ lastfm_text artist }} - {{ name }}</a>
         </p>
         <p class="track-date">
           {{ formatted_date }}
