@@ -179,6 +179,7 @@ $(document).on "click", "ul#links a.static-page", (e) ->
       modal.append(post)
       $("body").append(modal);
       el.parent().removeClass('loading')
+      close_all_modals()
       modal.modal('show');
 
 $ ->

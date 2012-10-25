@@ -214,6 +214,7 @@
         modal.append(post);
         $("body").append(modal);
         el.parent().removeClass('loading');
+        close_all_modals();
         return modal.modal('show');
       }
     });
