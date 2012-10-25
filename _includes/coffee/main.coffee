@@ -37,9 +37,12 @@ show_twitter = ->
   load_template 'twitter', ->
 
     $.ajax
-      url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name={{site.twitter}}"
+      url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&include_entities=true&screen_name={{site.twitter}}"
       dataType: "jsonp"
       success: (data) ->
+        $(data).each ->
+          this.text = linkify_entities(this)
+
         show_profile 'twitter',
           user:
             name: data[0].user.name

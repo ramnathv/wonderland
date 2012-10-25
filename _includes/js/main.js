@@ -46,9 +46,12 @@
     $("#twitter-link").parent().addClass('loading');
     return load_template('twitter', function() {
       return $.ajax({
-        url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name={{site.twitter}}",
+        url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&include_entities=true&screen_name={{site.twitter}}",
         dataType: "jsonp",
         success: function(data) {
+          $(data).each(function() {
+            return this.text = linkify_entities(this);
+          });
           return show_profile('twitter', {
             user: {
               name: data[0].user.name,
