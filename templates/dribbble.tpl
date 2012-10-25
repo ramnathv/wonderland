@@ -1,4 +1,4 @@
-<div class="profile dribbble modal fade-large" id="dribbble-profile">
+<div class="profile dribbble modal fade-large" id="dribbble-profile" data-profile-name="dribbble">
   {{#with user}}
   <div class="profile-info">
     <button class="close" data-dismiss="modal">×</button>

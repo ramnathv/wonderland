@@ -1,4 +1,4 @@
-<div class="profile instagram modal fade-large" id="instagram-profile">
+<div class="profile instagram modal fade-large" id="instagram-profile" data-profile-name="instagram">
   {{#with user}}
   <div class="profile-info">
     <button class="close" data-dismiss="modal">×</button>

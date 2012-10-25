@@ -1,10 +1,19 @@
-twitter_template = false
-github_template = false
-instagram_template = false
-dribbble_template = false
+templates = {
+  twitter: false
+  github: false
+  instagram: false
+  dribbble: false
+}
 
-show_profile = (html) ->
-  modal = $(html)
+load_template = (template_name, callback) ->
+  $.ajax
+    url: "{{site.url}}/templates/#{template_name}.tpl"
+    success: (data) ->
+      templates[template_name] = Handlebars.compile(data)
+      callback()
+
+show_profile = (profile_name, context) ->
+  modal = $(templates[profile_name](context))
   $("body").append(modal)
   close_all_modals()
   modal.find(".timeago-instagram").each ->
@@ -12,57 +21,10 @@ show_profile = (html) ->
   modal.find(".timeago").timeago()
   modal.modal('show')
 
+  $("##{profile_name}-link").parent().removeClass('loading')
+
 close_all_modals = ->
   $(".modal.in").modal('hide')
-
-render_twitter = (data) ->
-
-  context =
-    user:
-      name: data[0].user.name
-      screen_name: data[0].user.screen_name
-      profile_image_url: data[0].user.profile_image_url
-      f_description: data[0].user.description
-      location: data[0].user.location
-      url: data[0].user.url
-
-      statuses_count: data[0].user.statuses_count
-      friends_count: data[0].user.friends_count
-      followers_count: data[0].user.followers_count
-
-    tweets: data
-
-  show_profile(twitter_template(context))
-
-  $("#twitter-link").parent().removeClass('loading')
-
-render_github = (user_data, repo_data) ->
-  context =
-    user: user_data
-
-    repos: repo_data
-
-  show_profile(github_template(context))
-
-  $("#github-link").parent().removeClass('loading')
-
-render_instagram = (user_data, photo_data) ->
-  context =
-    user: user_data.data
-    media: photo_data.data
-
-  show_profile(instagram_template(context))
-
-  $("#instagram-link").parent().removeClass('loading')
-
-render_dribbble = (data) ->
-  context =
-    shots: data.shots
-    user: data.shots[0].player
-
-  show_profile(dribbble_template(context))
-
-  $("#dribbble-link").parent().removeClass('loading')
 
 show_twitter = ->
   twitter_modal = $(".twitter.modal")
@@ -72,15 +34,26 @@ show_twitter = ->
 
   $("#twitter-link").parent().addClass('loading')
 
-  $.ajax
-    url: "{{site.url}}/templates/twitter.tpl"
-    success: (data) ->
-      twitter_template = Handlebars.compile(data)
+  load_template 'twitter', ->
 
-      $.ajax
-        url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name={{site.twitter}}"
-        dataType: "jsonp"
-        success: render_twitter
+    $.ajax
+      url: "http://api.twitter.com/1/statuses/user_timeline.json?include_rts=true&screen_name={{site.twitter}}"
+      dataType: "jsonp"
+      success: (data) ->
+        show_profile 'twitter',
+          user:
+            name: data[0].user.name
+            screen_name: data[0].user.screen_name
+            profile_image_url: data[0].user.profile_image_url
+            f_description: data[0].user.description
+            location: data[0].user.location
+            url: data[0].user.url
+
+            statuses_count: data[0].user.statuses_count
+            friends_count: data[0].user.friends_count
+            followers_count: data[0].user.followers_count
+
+          tweets: data
 
 show_github = ->
   github_modal = $(".github.modal")
@@ -90,21 +63,21 @@ show_github = ->
 
   $("#github-link").parent().addClass('loading')
 
-  $.ajax
-    url: "{{site.url}}/templates/github.tpl"
-    success: (data) ->
-      github_template = Handlebars.compile(data)
+  load_template 'github', ->
 
-      $.ajax
-        url: "https://api.github.com/users/{{site.github}}"
-        dataType: "jsonp"
-        success: (user_data) ->
+    $.ajax
+      url: "https://api.github.com/users/{{site.github}}"
+      dataType: "jsonp"
+      success: (user_data) ->
 
-          $.ajax
-            url: "https://api.github.com/users/{{site.github}}/repos"
-            dataType: "jsonp"
-            success: (repo_data) ->
-              render_github(user_data.data, repo_data.data)
+        $.ajax
+          url: "https://api.github.com/users/{{site.github}}/repos"
+          dataType: "jsonp"
+          success: (repo_data) ->
+            show_profile 'github',
+              user: user_data.data
+              repos: repo_data.data
+
 
 show_instagram = ->
   instagram_modal = $(".instagram.modal")
@@ -114,21 +87,21 @@ show_instagram = ->
 
   $("#instagram-link").parent().addClass('loading')
 
-  $.ajax
-    url: "{{site.url}}/templates/instagram.tpl"
-    success: (data) ->
-      instagram_template = Handlebars.compile(data)
+  load_template 'instagram', ->
 
-      $.ajax
-        url: "https://api.instagram.com/v1/users/{{site.instagram_id}}?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
-        dataType: "jsonp"
-        success: (user_data) ->
+    $.ajax
+      url: "https://api.instagram.com/v1/users/{{site.instagram_id}}?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
+      dataType: "jsonp"
+      success: (user_data) ->
 
-          $.ajax
-            url: "https://api.instagram.com/v1/users/{{site.instagram_id}}/media/recent?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
-            dataType: "jsonp"
-            success: (photo_data) ->
-              render_instagram(user_data, photo_data)
+        $.ajax
+          url: "https://api.instagram.com/v1/users/{{site.instagram_id}}/media/recent?access_token=18360510.f59def8.d8d77acfa353492e8842597295028fd3"
+          dataType: "jsonp"
+          success: (photo_data) ->
+            show_profile 'instagram',
+              user: user_data.data
+              media: photo_data.data
+
 
 show_dribbble = ->
   dribbble_modal = $(".dribbble.modal")
@@ -138,16 +111,14 @@ show_dribbble = ->
 
   $("#dribbble-link").parent().addClass('loading')
 
-  $.ajax
-    url: "{{site.url}}/templates/dribbble.tpl"
-    success: (data) ->
-      dribbble_template = Handlebars.compile(data)
-
-      $.ajax
-        url: "http://api.dribbble.com/players/{{site.dribbble}}/shots"
-        dataType: "jsonp"
-        success: (data) ->
-          render_dribbble(data)
+  load_template 'dribbble', ->
+    $.ajax
+      url: "http://api.dribbble.com/players/{{site.dribbble}}/shots"
+      dataType: "jsonp"
+      success: (data) ->
+        show_profile 'dribbble',
+          shots: data.shots
+          user: data.shots[0].player
 
 first_active = false
 
@@ -170,17 +141,9 @@ $(document).on "click", "#github-link", show_github
 $(document).on "click", "#instagram-link", show_instagram
 $(document).on "click", "#dribbble-link", show_dribbble
 
-$(document).on "show", ".twitter.modal", ->
-  set_active_nav($("#twitter-link").parent())
-
-$(document).on "show", ".github.modal", ->
-  set_active_nav($("#github-link").parent())
-
-$(document).on "show", ".instagram.modal", ->
-  set_active_nav($("#instagram-link").parent())
-
-$(document).on "show", ".dribbble.modal", ->
-  set_active_nav($("#dribbble-link").parent())
+$(document).on "show", ".profile.modal", ->
+  profile_name = $(this).data('profile-name')
+  set_active_nav($("##{profile_name}-link").parent())
 
 $(document).on "show", ".post.modal", ->
   page_name = $(this).data('page-name')

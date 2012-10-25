@@ -1,4 +1,4 @@
-<div class="profile github modal" id="github-profile">
+<div class="profile github modal" id="github-profile" data-profile-name="github">
   {{#with user }}
   <div class="profile-info">
     <button class="close" data-dismiss="modal">×</button>
