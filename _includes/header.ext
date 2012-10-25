@@ -39,6 +39,9 @@
             {% if site.dribbble %}
               <li><a id="dribbble-link">dribbble</a><div class="loading-spinner"></div></li>
             {% endif %}
+            {% if site.lastfm %}
+              <li><a id="lastfm-link">last.fm</a><div class="loading-spinner"></div></li>
+            {% endif %}
             <li>
               <a href="{{site.url}}/contact/" class="static-page" data-page-name="contact">contact</a>
               <div class="loading-spinner"></div>

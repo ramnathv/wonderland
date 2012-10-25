@@ -1,9 +1,7 @@
-templates = {
-  twitter: false
-  github: false
-  instagram: false
-  dribbble: false
-}
+templates = {}
+
+numberWithCommas = (x) ->
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 load_template = (template_name, callback) ->
   $.ajax
@@ -123,6 +121,47 @@ show_dribbble = ->
           shots: data.shots
           user: data.shots[0].player
 
+show_lastfm = ->
+  lastfm_modal = $(".lastfm.modal")
+  if lastfm_modal.length
+    close_all_modals()
+    return lastfm_modal.modal('show')
+
+  $("#lastfm-link").parent().addClass('loading')
+
+  load_template 'lastfm', ->
+    $.ajax
+      url: "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user={{site.lastfm}}&api_key={{site.lastfm_api_key}}&format=json"
+      dataType: "jsonp"
+      success: (track_data) ->
+
+        $.ajax
+          url: "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user={{site.lastfm}}&api_key={{site.lastfm_api_key}}&format=json"
+          dataType: "jsonp"
+          success: (user_data) ->
+
+            user_data.user.formatted_plays = numberWithCommas(user_data.user.playcount);
+            user_data.user.formatted_playlists = numberWithCommas(user_data.user.playlists);
+            user_data.user.formatted_register_date = moment(user_data.user.registered['#text'], 'YYYY-MM-DD HH:mm').format('MM/DD/YYYY');
+
+            $.each track_data.recenttracks.track, (i, t) ->
+                # Lastfm can be really finicky with data and return garbage if
+                # the track is currently playing
+                try
+                  date = t.date['#text']
+                catch err
+                  t.formatted_date = 'Now Playing';
+                  return true # equivalent to 'continue' with a normal for loop
+
+                t.formatted_date = moment.utc(date, 'DD MMM YYYY, HH:mm').fromNow();
+
+
+            show_profile 'lastfm',
+              user_info: user_data
+              recenttracks: track_data
+
+
+
 first_active = false
 
 set_active_nav = (el) ->
@@ -143,6 +182,7 @@ $(document).on "click", "#twitter-link", show_twitter
 $(document).on "click", "#github-link", show_github
 $(document).on "click", "#instagram-link", show_instagram
 $(document).on "click", "#dribbble-link", show_dribbble
+$(document).on "click", "#lastfm-link", show_lastfm
 
 $(document).on "show", ".profile.modal", ->
   profile_name = $(this).data('profile-name')
@@ -187,8 +227,12 @@ $ ->
     lines: 9
     length: 5
     width: 2
-    radius: 5
-    corners: 1.0
-    rotate: 0
-    trail: 60
-    speed: 1.4
+    radius: 4
+    rotate: 9
+    color: '#4c4c4c'
+    speed: 1.5
+    trail: 40
+    shadow: false
+    hwaccel: false
+    className: 'spinner'
+    zIndex: 2e9
