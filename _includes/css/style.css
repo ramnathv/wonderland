@@ -118,6 +118,12 @@ p {
   margin-bottom: 10px;
   border-bottom: 1px solid #ddded7;
 }
+#content ol#posts li.post h3 span {
+  color: #aaa;
+  font-size: 12px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
 #content ol#posts li.post.nav {
   padding-top: 10px;
   border: 0;
