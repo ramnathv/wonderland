@@ -80,8 +80,9 @@
     $("#github-link").parent().addClass('loading');
     return load_template('github', function() {
       return $.ajax({
+        type: 'POST',
         url: "https://api.github.com/users/{{site.github}}",
-        data: "sort=updated",
+        data: {sort: "updated"},
         dataType: "jsonp",
         success: function(user_data) {
           return $.ajax({
