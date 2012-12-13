@@ -82,6 +82,9 @@
       return $.ajax({
         url: "https://api.github.com/users/{{site.github}}",
         dataType: "jsonp",
+        data: {
+          sort: updated;
+        }
         success: function(user_data) {
           return $.ajax({
             url: "https://api.github.com/users/{{site.github}}/repos",
