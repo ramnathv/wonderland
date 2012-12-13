@@ -17,3 +17,8 @@ instagram_id: 1574083
 
 server: true
 auto: true
+
+social:
+  github:
+    user: ramnathv
+    repo: wonderland
