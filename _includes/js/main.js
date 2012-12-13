@@ -81,7 +81,7 @@
     return load_template('github', function() {
       return $.ajax({
         url: "https://api.github.com/users/{{site.github}}",
-        data: "type=owner",
+        data: "sort=updated",
         dataType: "jsonp",
         success: function(user_data) {
           return $.ajax({
